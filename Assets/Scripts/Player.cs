@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit) && hit.collider.CompareTag("Tile"))
         {
+            Debug.DrawLine(ray.origin, hit.point);
             if (hit.collider.gameObject.GetComponent<Tile>().clicavel)
             {
                 Debug.Log(hit.collider.gameObject);
@@ -25,7 +26,7 @@ public class Player : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, target, step);
             }
 
-            Debug.DrawLine(ray.origin, hit.point);
+          
         }
     }
 }
