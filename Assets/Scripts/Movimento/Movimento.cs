@@ -5,46 +5,67 @@ using UnityEngine;
 
 public class Movimento : MonoBehaviour
 {
-    Transform target;
+    public bool cima;
+    public bool baixo;
+    public bool esquerda;
+    public bool direita;
+    Vector3 target;
+    public float step;
 
+    private void Start()
+    {
+        
+    }
     private void Update()
     {
-        Mover();
+        Rayteste();
         if (Input.GetMouseButtonDown(0))
         {
-            NavMesh();
+            Mover();
             
         }      
     }
-    void Mover()
+    void Rayteste()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 2f) 
-            || Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 2f ) 
-            || Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 2f ))
+        if (true)
         {
-            
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.back) * hit.distance, Color.yellow);
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left) * hit.distance, Color.yellow);
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * hit.distance, Color.yellow);
 
-            Debug.Log("Did Hit");
+        }
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.forward, out hit, 1f) 
+            || Physics.Raycast(transform.position, Vector3.back, out hit, 1f )
+            || Physics.Raycast(transform.position, Vector3.left, out hit, 1f ) 
+            || Physics.Raycast(transform.position, Vector3.right, out hit, 1f))
+        {
+            if (hit.collider.tag == "Andar")
+            {
+                hit.collider.tag = "Click";
+            }
+            else
+            {
+                //hit.transform.tag = "Andar";
+            }
+           Debug.DrawRay(transform.position, Vector3.forward * hit.distance, Color.yellow);
+            Debug.DrawRay(transform.position, Vector3.back * hit.distance, Color.yellow);
+            Debug.DrawRay(transform.position, Vector3.left * hit.distance, Color.yellow);
+            Debug.DrawRay(transform.position, Vector3.right * hit.distance, Color.yellow);
+           
         }
         else
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-            Debug.Log("Did not Hit");
+            
         }
     }
 
-    void NavMesh()
+    void Mover()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Andar")
+        if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Click")
         {
-            target = hit.transform;
+            
+            target = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, target, step);
         }
     }
 }
