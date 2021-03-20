@@ -22,10 +22,10 @@ public class Player : MonoBehaviour
             {
                 Debug.Log(hit.collider.gameObject);
                 target = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
-                transform.position = Vector3.MoveTowards(transform.position, target, step);  
+                transform.position = Vector3.MoveTowards(transform.position, target, step);
             }
+
             Debug.DrawLine(ray.origin, hit.point);
-            
         }
     }
 }
