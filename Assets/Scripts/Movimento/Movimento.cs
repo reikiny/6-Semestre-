@@ -12,10 +12,7 @@ public class Movimento : MonoBehaviour
     Vector3 target;
     public float step;
 
-    private void Start()
-    {
-        
-    }
+   
     private void Update()
     {
         Rayteste();
@@ -27,10 +24,6 @@ public class Movimento : MonoBehaviour
     }
     void Rayteste()
     {
-        if (true)
-        {
-
-        }
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.forward, out hit, 1f) 
             || Physics.Raycast(transform.position, Vector3.back, out hit, 1f )
@@ -43,12 +36,12 @@ public class Movimento : MonoBehaviour
             }
             else
             {
-                //hit.transform.tag = "Andar";
+               
             }
            Debug.DrawRay(transform.position, Vector3.forward * hit.distance, Color.yellow);
-            Debug.DrawRay(transform.position, Vector3.back * hit.distance, Color.yellow);
-            Debug.DrawRay(transform.position, Vector3.left * hit.distance, Color.yellow);
-            Debug.DrawRay(transform.position, Vector3.right * hit.distance, Color.yellow);
+           Debug.DrawRay(transform.position, Vector3.back * hit.distance, Color.yellow);
+           Debug.DrawRay(transform.position, Vector3.left * hit.distance, Color.yellow);
+           Debug.DrawRay(transform.position, Vector3.right * hit.distance, Color.yellow);
            
         }
         else

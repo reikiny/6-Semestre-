@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8244843769492339972}
   - component: {fileID: 8244843769492339973}
   - component: {fileID: 2277846132930612083}
+  - component: {fileID: 4491818738768355160}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Andar
@@ -95,3 +96,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &4491818738768355160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244843769492339995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b882ed15c2b2a7d40a120dbf2d7592e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cima: 0
+  baixo: 0
+  esquerda: 0
+  direita: 0
+  step: 0
