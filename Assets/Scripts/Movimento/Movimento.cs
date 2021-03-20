@@ -26,8 +26,9 @@ public class Movimento : MonoBehaviour
     void Rayteste()
     {
         RaycastHit hit;
-        if (cima && Physics.Raycast(transform.position, Vector3.forward, out hit, distace))
+        if (cima && Physics.Raycast(transform.position, Vector3.forward, out hit, distace) && hit.collider.tag =="Andar")
         {
+            hit.collider.tag = "clicar";
             Debug.DrawRay(transform.position, Vector3.forward * hit.distance, Color.yellow);
         }
         if (baixo && Physics.Raycast(transform.position, Vector3.back, out hit, distace))
