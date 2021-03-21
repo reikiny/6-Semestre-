@@ -18,7 +18,6 @@ public class Turns : MonoBehaviour
             control = false;
             StartCoroutine(WaitEnemyTurn());
             turnCount++;
-
         }
     }
 
