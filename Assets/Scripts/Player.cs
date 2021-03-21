@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, target, step);
             }
             //penisnasiasdjiajsdasidjaodiajsdosiaj
+            //asdsadsadsadsadsadsada
             Debug.DrawLine(ray.origin, hit.point);
         }
     }
