@@ -5,9 +5,16 @@ using UnityEngine;
 public class RotateGround : MonoBehaviour
 {
     public Tile tile;
+
     public int nmr;
     public Directions[] directions;
-
+    private void Start()
+    {
+        tile.esquerda = directions[nmr].esquerda;
+        tile.direita = directions[nmr].direita;
+        tile.baixo = directions[nmr].baixo;
+        tile.cima = directions[nmr].cima;
+    }
     public void ChangeSide()
     {
         nmr++;

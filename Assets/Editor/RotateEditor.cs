@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 
-[CustomEditor(typeof(RotateGround)), CanEditMultipleObjects]
+[CustomEditor(typeof(RotateGround))]
 public class RotateEditor : Editor
 {
     public override void OnInspectorGUI()
@@ -12,6 +13,11 @@ public class RotateEditor : Editor
         if (GUILayout.Button("RotateTile"))
         {
             rotate.ChangeSide();
+        }
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(rotate);
+            EditorSceneManager.MarkSceneDirty(rotate.gameObject.scene);
         }
     }
 }
