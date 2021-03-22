@@ -8,12 +8,7 @@ public class Escudeiro : MonoBehaviour
     public GameObject jons;
 
     bool ativo;
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
     void Update()
     {
         RaycastHit hit;
