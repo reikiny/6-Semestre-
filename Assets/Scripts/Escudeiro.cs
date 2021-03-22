@@ -6,6 +6,7 @@ public class Escudeiro : MonoBehaviour
 {
     Vector3 target;
     public GameObject jons;
+    GameObject antigo;
 
     bool ativo;
 
@@ -28,11 +29,20 @@ public class Escudeiro : MonoBehaviour
             }
             if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag("Tile"))
             {
-                hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.red;
+                if (antigo != hit.collider.gameObject)
+                {
+                    if (antigo != null)
+                    {
+                        hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.white;
+                    }
+                    antigo = hit.collider.gameObject;
+                    hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.red;
+                }
             }
-            else if(hit.collider != null)
+            else if (hit.collider != null)
             {
                 hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.white;
+                antigo = null;
             }
         }
     }
