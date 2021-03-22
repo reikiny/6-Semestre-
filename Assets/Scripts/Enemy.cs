@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
         if (haveHit && Turns.enemyTurn)
         {
             if(hit.collider.CompareTag("Player")){
-                print("MORRI");
+                print("DEAD");
             }else{
 
             }
