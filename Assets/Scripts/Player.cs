@@ -30,15 +30,17 @@ public class Player : MonoBehaviour
                 target = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
                 transform.position = Vector3.MoveTowards(transform.position, target, step);
             }
-
+            //Matar Inimigo, precisa fazer certinho depois
             if (hit.collider.gameObject.GetComponent<Tile>().agentes == Agentes.Inimigo && Turns.playerTurn)
             {
                 Turns.playerTurn = false;
                 target = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
                 transform.position = Vector3.MoveTowards(transform.position, target, step);
+                hit.collider.gameObject.GetComponent<Tile>().inimigo.SetActive(false);
+                print("MATAR");
             }
-            Debug.DrawLine(ray.origin, hit.point);
-            Debug.Log(hit.collider.gameObject);
+ //           Debug.DrawLine(ray.origin, hit.point);
+//            Debug.Log(hit.collider.gameObject);
         }
     }
 

@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum  Agentes{Player,Inimigo,Escudeiro,Vazio}
+public enum Agentes { Player, Inimigo, Escudeiro, Vazio }
 public class Tile : MonoBehaviour
 {
-    public  Agentes agentes;
+    public Agentes agentes;
 
     public bool cima;
     public bool baixo;
     public bool direita;
     public bool esquerda;
 
-    public bool clicavel; 
-
+    public bool clicavel;
+    //remover depois
+    [HideInInspector]
+    public GameObject inimigo;
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -23,8 +25,9 @@ public class Tile : MonoBehaviour
         else if (other.gameObject.CompareTag("Enemy"))
         {
             agentes = Agentes.Inimigo;
+            inimigo = other.gameObject;
         }
-        else if(other.gameObject.CompareTag("Escudeiro"))
+        else if (other.gameObject.CompareTag("Escudeiro"))
         {
             agentes = Agentes.Escudeiro;
         }
@@ -35,9 +38,9 @@ public class Tile : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-       
-            agentes = Agentes.Vazio;
-       
-       
+
+        agentes = Agentes.Vazio;
+
+
     }
 }

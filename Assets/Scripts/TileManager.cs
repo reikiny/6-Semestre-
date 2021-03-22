@@ -10,7 +10,7 @@ public class TileManager : MonoBehaviour
 
     void Start()
     {
-
+        tile = FindObjectsOfType<Tile>();
     }
 
     void Update()
@@ -69,12 +69,17 @@ public class TileManager : MonoBehaviour
                 }
 
             }
-            if (temporarios[0] != tile[i].gameObject && temporarios[1] != tile[i].gameObject
-            && temporarios[2] != tile[i].gameObject && temporarios[3] != tile[i].gameObject)
+            else if (tile[i].agentes == Agentes.Vazio)
             {
-                tile[i].clicavel = false;
+
+                if (temporarios[0] != tile[i].gameObject && temporarios[1] != tile[i].gameObject
+                && temporarios[2] != tile[i].gameObject && temporarios[3] != tile[i].gameObject)
+                {
+                    tile[i].clicavel = false;
+                }
+                else tile[i].clicavel = true;
             }
-            else tile[i].clicavel = true;
+            else tile[i].clicavel = false;
 
         }
     }
