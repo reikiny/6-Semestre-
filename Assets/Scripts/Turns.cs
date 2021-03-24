@@ -26,7 +26,6 @@ public class Turns : MonoBehaviour
         //esperar um tempo pra IA agir
         yield return new WaitForSeconds(waitTime);
         enemyTurn = true;
-
         //espera 1 frame e depois deixa acessivel pro player fazer o movimento dele 
         yield return 0;
         enemyTurn = false;
