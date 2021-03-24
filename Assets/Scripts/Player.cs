@@ -6,7 +6,9 @@ public class Player : MonoBehaviour
 {
     public TileManager tileManager;
     public float step;
-
+    bool walk;
+    [HideInInspector]
+    public Tile tileClicked;
     int layer;
     Vector3 target;
 
@@ -17,47 +19,58 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Mover();
+
     }
     void Mover()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit, Mathf.Infinity, layer) && hit.collider.CompareTag("Tile"))
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit, Mathf.Infinity, layer) && hit.collider.CompareTag("Tile")
+        && !Escudeiro.ativo && Turns.playerTurn && !MiniGame.miniOpen)
         {
-            if (hit.collider.gameObject.GetComponent<Tile>().clicavel && Turns.playerTurn)
+            tileClicked = hit.collider.gameObject.GetComponent<Tile>();
+
+            if (tileClicked.clicavel)
             {
-                Turns.playerTurn = false;
-                target = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
-                transform.position = Vector3.MoveTowards(transform.position, target, step);
+                Acoes();
             }
             //Matar Inimigo, precisa fazer certinho depois
-            if (hit.collider.gameObject.GetComponent<Tile>().agentes == Agentes.Inimigo && Turns.playerTurn)
+            if (tileClicked.agentes == Agentes.Inimigo && Vector3.Distance(transform.position, tileClicked.objeto.transform.position) <= step * 1.5f)
             {
-                Turns.playerTurn = false;
-                target = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
-                transform.position = Vector3.MoveTowards(transform.position, target, step);
-                hit.collider.gameObject.GetComponent<Tile>().inimigo.SetActive(false);
-                print("MATAR");
+                tileClicked.objeto.SetActive(false);
+
+                Acoes();
+
+
             }
- //           Debug.DrawLine(ray.origin, hit.point);
-//            Debug.Log(hit.collider.gameObject);
+            if (tileClicked.agentes == Agentes.Bau && Vector3.Distance(transform.position, tileClicked.objeto.transform.position) <= step * 1.5f)
+            {
+
+                Acoes();
+
+            }
+            //print(Vector3.Distance(transform.position, tileClicked.objeto.transform.position));
+            //Debug.DrawLine(ray.origin, hit.point);
+            //Debug.Log(hit.collider.gameObject);
         }
+
+        if (walk)
+        {
+            target = new Vector3(tileClicked.transform.position.x, transform.position.y, tileClicked.transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, target, step * Time.deltaTime);
+
+        }
+        if (Turns.playerTurn) walk = false;
+
     }
 
-    //void Mover()
-    //{
-    //    RaycastHit hit;
-    //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    //    if (Physics.Raycast(ray, out hit, Mathf.Infinity, layer))
-    //    {
-    //        //if (hit.collider.gameObject.GetComponent<Tile>().clicavel && Turns.playerTurn)
-    //        //{
-    //        //    Turns.playerTurn = false;
-    //        //    target = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
-    //        //    transform.position = Vector3.MoveTowards(transform.position, target, step);
-    //        //}
-    //        Debug.DrawLine(ray.origin, hit.point);
-    //        Debug.Log(hit.collider.gameObject);
-    //    }
-    //}
+    void Acoes()
+    {
+        Turns.playerTurn = false;
+        walk = true;
+        Vector3 point = tileClicked.transform.position;
+        point.y = transform.position.y;
+        transform.LookAt(point);
+    }
+
 }

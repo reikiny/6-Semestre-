@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Tile
   - Escudeiro
+  - Bau
   layers:
   - Default
   - TransparentFX

@@ -29,7 +29,7 @@ public class LevelGenerator : MonoBehaviour
             for (int y = 0; y < map.height; y++)
             {
                 GenerateTile(x, y);
-                
+
             }
         }
     }
@@ -51,7 +51,7 @@ public class LevelGenerator : MonoBehaviour
 
             if (colorMapping.color.Equals(pixelColor))
             {
-                Vector3 position = new Vector3(x , 0, y );
+                Vector3 position = new Vector3(x * multiplicador, 0, y * multiplicador);
                 Instantiate(colorMapping.prefab, position, Quaternion.identity, transform);
             }
         }

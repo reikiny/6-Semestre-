@@ -5,7 +5,6 @@ using UnityEngine;
 public class RotateGround : MonoBehaviour
 {
     public Tile tile;
-
     public int nmr;
     public Directions[] directions;
     private void Start()

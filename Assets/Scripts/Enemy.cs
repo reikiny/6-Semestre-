@@ -2,14 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     public float range;
     public Transform pos;
     public float cooldown;
-    float currentCd;
-
+    [HideInInspector]
+    public float currentCd;
+    public Image cdImage;
+    private void Start()
+    {
+        currentCd = cooldown;
+    }
     private void Update()
+    {
+        Bater();
+        UI();
+    }
+
+    public void Bater()
     {
         //fazer detecção pelos tiles
         RaycastHit hit;
@@ -23,16 +35,24 @@ public class Enemy : MonoBehaviour
             }
             else if (hit.collider.CompareTag("Escudeiro"))
             {
-                currentCd--;
-                if (currentCd < 0)
+                currentCd++;
+
+                if (currentCd > cooldown)
                 {
-                    currentCd = cooldown;
-                    Escudeiro.vida--;
+                    currentCd = 0;
+                    Jons.vida--;
+
                 }
 
             }
         }
     }
+
+    public void UI()
+    {
+        cdImage.fillAmount = currentCd / cooldown;
+    }
+
     private void OnDrawGizmos()
     {
         RaycastHit hit;

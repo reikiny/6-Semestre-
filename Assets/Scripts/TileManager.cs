@@ -26,6 +26,7 @@ public class TileManager : MonoBehaviour
             if (tile[i].agentes == Agentes.Player)
             {
                 tile[i].clicavel = false;
+
                 RaycastHit hit;
 
                 if (tile[i].cima && Physics.Raycast(tile[i].transform.position, Vector3.forward, out hit, 1f) && hit.collider.CompareTag("Tile"))
@@ -83,4 +84,5 @@ public class TileManager : MonoBehaviour
 
         }
     }
+
 }
