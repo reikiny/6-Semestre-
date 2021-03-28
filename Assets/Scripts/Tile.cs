@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Agentes { Player, Inimigo, Escudeiro, Vazio, Bau }
+public enum Agentes { Player, Inimigo, Escudeiro, Vazio, Bau, End, Obstaculo }
 public class Tile : MonoBehaviour
 {
     public Agentes agentes;
@@ -35,6 +35,10 @@ public class Tile : MonoBehaviour
         {
             agentes = Agentes.Bau;
             objeto = other.gameObject;
+        }
+        else if (other.gameObject.CompareTag("Obstaculo"))
+        {
+            agentes = Agentes.Obstaculo;
         }
         else
         {

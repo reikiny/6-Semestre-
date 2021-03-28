@@ -14,7 +14,6 @@ public class MiniTile : MonoBehaviour
         if (nmr == nmrCerto) acerto = true;
         else acerto = false;
 
-        transform.rotation = Quaternion.Euler(0f, 0f, 90f * nmr);
     }
     public void ChangeSide()
     {
@@ -24,6 +23,7 @@ public class MiniTile : MonoBehaviour
             nmr = 0;
         }
 
+        transform.rotation = Quaternion.Euler(0f, 0f, 90f * nmr);
 
 
     }

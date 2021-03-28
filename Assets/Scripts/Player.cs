@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     int layer;
     Vector3 target;
 
+
     private void Start()
     {
         layer = LayerMask.GetMask("Tile");
@@ -26,7 +27,7 @@ public class Player : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit, Mathf.Infinity, layer) && hit.collider.CompareTag("Tile")
-        && !Escudeiro.ativo && Turns.playerTurn && !MiniGame.miniOpen)
+        && !Squire.ativo && Turns.playerTurn && !MiniGame.miniOpen)
         {
             tileClicked = hit.collider.gameObject.GetComponent<Tile>();
 
@@ -35,7 +36,7 @@ public class Player : MonoBehaviour
                 Acoes();
             }
             //Matar Inimigo, precisa fazer certinho depois
-            if (tileClicked.agentes == Agentes.Inimigo && Vector3.Distance(transform.position, tileClicked.objeto.transform.position) <= step * 1.5f)
+            if (tileClicked.agentes == Agentes.Inimigo && Vector3.Distance(transform.position, tileClicked.objeto.transform.position) <= step * 1.2f)
             {
                 tileClicked.objeto.SetActive(false);
 
@@ -43,13 +44,13 @@ public class Player : MonoBehaviour
 
 
             }
-            if (tileClicked.agentes == Agentes.Bau && Vector3.Distance(transform.position, tileClicked.objeto.transform.position) <= step * 1.5f)
+            if (tileClicked.agentes == Agentes.Bau && Vector3.Distance(transform.position, tileClicked.objeto.transform.position) <= step * 1.2f)
             {
 
                 Acoes();
 
             }
-            //print(Vector3.Distance(transform.position, tileClicked.objeto.transform.position));
+            //print(Vector3.Distance(transform.position, tileClicked.objeto.transform.position) + " Step:" + (step * 1.2f));
             //Debug.DrawLine(ray.origin, hit.point);
             //Debug.Log(hit.collider.gameObject);
         }
@@ -57,7 +58,7 @@ public class Player : MonoBehaviour
         if (walk)
         {
             target = new Vector3(tileClicked.transform.position.x, transform.position.y, tileClicked.transform.position.z);
-            transform.position = Vector3.MoveTowards(transform.position, target, step * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target, step * Time.deltaTime );
 
         }
         if (Turns.playerTurn) walk = false;

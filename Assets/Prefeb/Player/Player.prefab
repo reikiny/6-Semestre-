@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4300447191395520090}
   - component: {fileID: 4300447191395520095}
   - component: {fileID: 4300447191395520093}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4298917112733910147}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -111,8 +111,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.737278, y: 1.7659436, z: 0.88609314}
-  m_Center: {x: -0.019104838, y: 0.9020489, z: 0.028354645}
+  m_Size: {x: 0.737278, y: 1.7659436, z: 0.81273496}
+  m_Center: {x: -0.019104838, y: 0.9020489, z: 0.065033734}
 --- !u!114 &4300447191395520093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,4 +126,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileManager: {fileID: 0}
-  step: 1
+  step: 2
+  tileClicked: {fileID: 0}

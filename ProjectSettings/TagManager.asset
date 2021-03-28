@@ -9,6 +9,7 @@ TagManager:
   - Tile
   - Escudeiro
   - Bau
+  - Obstaculo
   layers:
   - Default
   - TransparentFX

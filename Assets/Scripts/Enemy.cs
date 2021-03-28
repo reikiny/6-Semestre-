@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public float currentCd;
     public Image cdImage;
+
     private void Start()
     {
         currentCd = cooldown;
