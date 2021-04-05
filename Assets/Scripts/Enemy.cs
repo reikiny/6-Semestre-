@@ -3,14 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 public class Enemy : MonoBehaviour
 {
+    [VerticalGroup("Split", 0.5f)]
+    [BoxGroup("Split/Attack")]
     public float range;
+
+    [BoxGroup("Split/Attack")]
+    [ChildGameObjectsOnly]
     public Transform pos;
+
+    [BoxGroup("Split/Feedback")]
     public float cooldown;
+
+    [BoxGroup("Split/Feedback")]
+    [PreviewField(30, ObjectFieldAlignment.Left)]
+    [ChildGameObjectsOnly]
+    public Image cdImage;
+
     [HideInInspector]
     public float currentCd;
-    public Image cdImage;
 
     private void Start()
     {

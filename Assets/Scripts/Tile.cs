@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public enum Agentes { Player, Inimigo, Escudeiro, Vazio, Bau, End, Obstaculo }
 public class Tile : MonoBehaviour
 {
-    public Agentes agentes;
-
+    [BoxGroup("Directions")]
     public bool cima;
+
+    [BoxGroup("Directions")]
     public bool baixo;
+
+    [BoxGroup("Directions")]
     public bool direita;
+
+    [BoxGroup("Directions")]
     public bool esquerda;
 
+    [BoxGroup("Agentes")]
+    [HideLabel]
+    public Agentes agentes;
+
+    [BoxGroup("Clickable")]
     public bool clicavel;
+
+
+
     //remover depois
     [HideInInspector]
     public GameObject objeto;

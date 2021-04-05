@@ -17597,6 +17597,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2572795295690667213, guid: 1a8e9d48e26ae2e4dbe80f91accc381b, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 503
+      objectReference: {fileID: 0}
     - target: {fileID: 2572795295690667216, guid: 1a8e9d48e26ae2e4dbe80f91accc381b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -19220,7 +19224,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 503
 --- !u!224 &494857941671688371
 RectTransform:
   m_ObjectHideFlags: 0

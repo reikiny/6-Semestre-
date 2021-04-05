@@ -5,12 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class Laser : Enemy
 {
-    LineRenderer lineRenderer;
+    private LineRenderer _lineRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer = GetComponent<LineRenderer>();
         currentCd = cooldown;
     }
 
@@ -18,12 +18,12 @@ public class Laser : Enemy
     void Update()
     {
         RaycastHit hit;
-        lineRenderer.SetPosition(0, pos.position);
+        _lineRenderer.SetPosition(0, pos.position);
         if (Physics.Raycast(pos.position, pos.forward, out hit, range))
         {
-            if (hit.collider) lineRenderer.SetPosition(1, transform.forward * hit.distance + pos.position);
+            if (hit.collider) _lineRenderer.SetPosition(1, transform.forward * hit.distance + pos.position);
         }
-        else lineRenderer.SetPosition(1, transform.forward * range + pos.position);
+        else _lineRenderer.SetPosition(1, transform.forward * range + pos.position);
 
         Bater();
         UI();
