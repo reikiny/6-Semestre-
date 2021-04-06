@@ -12,7 +12,8 @@ public class Patrol : Enemy
     public float duration;
 
     private int _index;
-    private bool positive;
+    private bool _positive;
+
 
     private void Update()
     {
@@ -25,25 +26,24 @@ public class Patrol : Enemy
 
     private void ChangeIndex()
     {
-        if (positive) _index++;
+        if (_positive) _index++;
         else _index--;
+
     }
 
     private void Walk()
     {
-        if (_index == 0)
-        {
-            positive = true;
-            transform.LookAt(instantiate.waypoints[_index + 1].transform);
-        }
-        else if (_index == instantiate.waypoints.Count - 1)
-        {
-            transform.LookAt(instantiate.waypoints[_index - 1].transform);
-            positive = false;
-        }
-        else transform.LookAt(instantiate.waypoints[_index].transform);
+        if (_index == 0) _positive = true;
+
+        if (_index == instantiate.waypoints.Count - 1) _positive = false;
+
+
+        if (_positive) transform.LookAt(instantiate.waypoints[_index + 1].transform);
+        else transform.LookAt(instantiate.waypoints[_index - 1].transform);
 
         transform.position = Vector3.MoveTowards(transform.position, instantiate.waypoints[_index].transform.position, duration * Time.deltaTime);
+
     }
+
 
 }
