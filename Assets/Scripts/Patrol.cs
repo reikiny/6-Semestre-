@@ -19,7 +19,11 @@ public class Patrol : Enemy
     {
         Bater();
         UI();
-        if (Turns.enemyTurn) ChangeIndex();
+        RaycastHit hit;
+        bool haveHit = Physics.Raycast(pos.position, pos.forward, out hit, range);
+
+        if (Turns.enemyTurn && !haveHit)
+            ChangeIndex();
 
         Walk();
     }

@@ -70,13 +70,13 @@ public class Instantiate : MonoBehaviour
     }
 
     [PropertyOrder(1)]
-    [ShowIf("_toggle")]
     [Button(ButtonSizes.Large), GUIColor(1f, 0.2f, 0.2f)]
     [ButtonGroup]
     private void Clear()
     {
-        _toggle = !_toggle;
-        _hide = !_hide;
+        _toggle = false;
+        _toggle2 = false;
+        _hide = false;
 
         for (int i = 0; i < waypoints.Count; i++)
         {
