@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class Turns : MonoBehaviour
 {
@@ -9,7 +9,14 @@ public class Turns : MonoBehaviour
     public float waitTime;
     public static bool playerTurn = true;
     public static bool enemyTurn;
+    public Text turnDisplay;
     bool control = true;
+
+    private void Start()
+    {
+        turnDisplay.text = turnCount.ToString();
+    }
+
     private void Update()
     {
         //Usando o control pra nao iniciar a coroutine mais de uma vez. O turn count é caso quisermos contar quantos turnos ele passou
@@ -18,6 +25,7 @@ public class Turns : MonoBehaviour
             control = false;
             StartCoroutine(WaitEnemyTurn());
             turnCount++;
+            turnDisplay.text = turnCount.ToString();
         }
     }
 

@@ -20,7 +20,7 @@ public class LevelGenerator : MonoBehaviour
     [Range(1, 3)]
     public float multiplicador;
 
-    private List<GameObject> _stored;
+    private List<GameObject> _stored= new List<GameObject>();
     private bool _toggle;
 
     [TabGroup("Map")]

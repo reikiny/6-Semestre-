@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5550051350909551378}
   - component: {fileID: 5868407509885486366}
   - component: {fileID: 7833664437899531995}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 6487612481569642833}
   - component: {fileID: 6487612481569642834}
   - component: {fileID: 6487612481569642835}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Lanceiro
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -250,8 +250,8 @@ MonoBehaviour:
   range: 1
   pos: {fileID: 6487612481921235658}
   cooldown: 1
-  currentCd: 0
   cdImage: {fileID: 2715657048372635362}
+  currentCd: 0
 --- !u!1 &6487612481921235659
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,7 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6487612481921235658}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 8119368901451803777}
   - component: {fileID: 2959131811144879742}
   - component: {fileID: 2323155267950405258}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: CdBg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 5642385286529027699}
   - component: {fileID: 4499428230679131516}
   - component: {fileID: 2715657048372635362}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: CD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,6 +486,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4a876d53448c1f84ea7ec57f9a4c73ae, type: 3}
       propertyPath: m_Name
       value: lanca
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4a876d53448c1f84ea7ec57f9a4c73ae, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a876d53448c1f84ea7ec57f9a4c73ae, type: 3}

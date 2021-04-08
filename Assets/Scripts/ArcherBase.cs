@@ -3,29 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-public class Laser : Enemy
+public class ArcherBase : Enemy
 {
-    private LineRenderer _lineRenderer;
+    protected LineRenderer _lineRenderer;
 
-    // Start is called before the first frame update
-    void Start()
+    protected override void Init()
     {
+        base.Init();
         _lineRenderer = GetComponent<LineRenderer>();
-        currentCd = cooldown;
+
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Inherited()
+    {
+        base.Inherited();
+        Aim();
+    }
+    protected virtual void Aim()
     {
         RaycastHit hit;
         _lineRenderer.SetPosition(0, pos.position);
-        if (Physics.Raycast(pos.position, pos.forward, out hit, range))
+        if (Physics.Raycast(pos.position, pos.forward, out hit, range, ~_layerMask))
         {
             if (hit.collider) _lineRenderer.SetPosition(1, transform.forward * hit.distance + pos.position);
         }
         else _lineRenderer.SetPosition(1, transform.forward * range + pos.position);
 
-        Bater();
-        UI();
     }
+
 }

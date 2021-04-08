@@ -747,6 +747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnCount: 0
   waitTime: 1
+  turnDisplay: {fileID: 0}
 --- !u!1 &1064539163
 GameObject:
   m_ObjectHideFlags: 0

@@ -64,6 +64,5 @@ public class Tile : MonoBehaviour
 
         agentes = Agentes.Vazio;
 
-
     }
 }

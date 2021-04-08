@@ -7,32 +7,35 @@ public class FollowPlayer : Enemy
 {
 
     [PropertyOrder(2)]
-    public List<Vector3> targetPositions;
+    [BoxGroup("FollowStats")]
+    public GameObject _inicialTarget;
 
     [PropertyOrder(2)]
-    public GameObject inicialTarget;
-
-    [PropertyOrder(2)]
+    [BoxGroup("FollowStats")]
     public float seeRange;
 
+    [BoxGroup("FollowStats")]
     [PropertyOrder(2)]
-    public float duration;
+    public float speed;
 
     private int _index;
     private bool _beginAction;
+    private bool _tooClose;
     private Transform _playerTransform;
     private Vector3 _playerOldPos;
+    private List<Vector3> _targetPositions= new List<Vector3>();
 
-    private void Start()
+    protected override void Init()
     {
-        inicialTarget.transform.parent = null;
-        targetPositions.Add(inicialTarget.transform.position);
+        base.Init();
+        _inicialTarget.transform.parent = null;
+        _targetPositions.Add(_inicialTarget.transform.position);
+
     }
-    void Update()
+    protected override void Inherited()
     {
-        Bater();
-        UI();
-        
+        base.Inherited();
+
         RaycastHit hit;
         bool haveSeen = Physics.Raycast(pos.position, pos.forward, out hit, seeRange);
 
@@ -52,31 +55,49 @@ public class FollowPlayer : Enemy
         {
             if (Turns.enemyTurn)
             {
-                targetPositions.Add(_playerOldPos);
+                _targetPositions.Add(_playerOldPos);
                 _playerOldPos = _playerTransform.position;
-
+                _tooClose = false;
             }
             RaycastHit hit2;
             bool haveHit = Physics.Raycast(pos.position, pos.forward, out hit2, range);
-            if (targetPositions.Count > 1 && !haveHit)
-                Move();
+            bool cantWalk = haveHit && hit2.collider.CompareTag("Escudeiro");
+
+            if (_targetPositions.Count > 1)
+                if (!cantWalk)
+                    Move();
         }
     }
 
-
-
-
     public void Move()
     {
-        transform.LookAt(targetPositions[1]);
+        transform.LookAt(_targetPositions[1]);
 
-        if (Vector3.Distance(transform.position, targetPositions[0]) > 0)
+        if (!_tooClose)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPositions[0], duration * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _targetPositions[0], speed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, _targetPositions[0]) < 0.5f)
+                RestrictWalk();
+
         }
-        else
+        if (_tooClose || Vector3.Distance(transform.position, _targetPositions[0]) <= 0)
         {
-            targetPositions.RemoveAt(0);
+            _targetPositions.RemoveAt(0);
+        }
+
+    }
+
+    //Tirei para ver como fica
+    private void RestrictWalk()
+    {
+        foreach (GameObject go in _enemies)
+        {
+            if (go == gameObject) continue;
+            if (Vector3.Distance(go.transform.position, gameObject.transform.position) < 0.6f)
+            {
+                //_tooClose = true;
+                break;
+            }
         }
     }
 }

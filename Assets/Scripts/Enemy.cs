@@ -24,22 +24,36 @@ public class Enemy : MonoBehaviour
 
     [HideInInspector]
     public float currentCd;
+    protected GameObject[] _enemies;
+    protected LayerMask _layerMask = (1 << 9);
 
     private void Start()
     {
-        currentCd = cooldown;
+        Init();
     }
+
+    protected virtual void Init()
+    {
+        currentCd = cooldown;
+        _enemies = GameObject.FindGameObjectsWithTag("Enemy");
+    }
+
     private void Update()
+    {
+        Inherited();
+    }
+
+    protected virtual void Inherited()
     {
         Bater();
         UI();
     }
 
-    public void Bater()
+    protected virtual void Bater()
     {
         //fazer detecção pelos tiles
         RaycastHit hit;
-        bool haveHit = Physics.Raycast(pos.position, pos.forward, out hit, range);
+        bool haveHit = Physics.Raycast(pos.position, pos.forward, out hit, range, ~_layerMask);
         if (haveHit && Turns.enemyTurn)
         {
             if (hit.collider.CompareTag("Player"))
@@ -71,7 +85,7 @@ public class Enemy : MonoBehaviour
     {
         RaycastHit hit;
 
-        bool isHit = Physics.Raycast(pos.position, pos.forward, out hit, range);
+        bool isHit = Physics.Raycast(pos.position, pos.forward, out hit, range, ~_layerMask);
         if (isHit)
         {
             Gizmos.color = Color.red;

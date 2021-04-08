@@ -6,26 +6,31 @@ public class Patrol : Enemy
 {
 
     [PropertyOrder(2)]
+    [ChildGameObjectsOnly]
+    [BoxGroup("PathStats")]
     public Instantiate instantiate;
 
     [PropertyOrder(2)]
-    public float duration;
+    [BoxGroup("PathStats")]
+    public float speed;
 
     private int _index;
     private bool _positive;
+    private bool _tooClose;
 
-
-    private void Update()
+    protected override void Inherited()
     {
-        Bater();
-        UI();
-        RaycastHit hit;
-        bool haveHit = Physics.Raycast(pos.position, pos.forward, out hit, range);
+        base.Inherited();
 
-        if (Turns.enemyTurn && !haveHit)
+        if (Turns.enemyTurn)
             ChangeIndex();
 
-        Walk();
+        RaycastHit hit;
+        bool haveHit = Physics.Raycast(pos.position, pos.forward, out hit, range);
+        bool cantWalk = haveHit && hit.collider.CompareTag("Escudeiro");
+
+        if (!cantWalk)
+            Walk();
     }
 
     private void ChangeIndex()
@@ -33,6 +38,20 @@ public class Patrol : Enemy
         if (_positive) _index++;
         else _index--;
 
+        _tooClose = false;
+    }
+
+    private void RestrictWalk()
+    {
+        foreach (GameObject go in _enemies)
+        {
+            if (go == gameObject) continue;
+            if (go && Vector3.Distance(go.transform.position, gameObject.transform.position) < 0.6f)
+            {
+                _tooClose = true;
+                break;
+            }
+        }
     }
 
     private void Walk()
@@ -45,9 +64,18 @@ public class Patrol : Enemy
         if (_positive) transform.LookAt(instantiate.waypoints[_index + 1].transform);
         else transform.LookAt(instantiate.waypoints[_index - 1].transform);
 
-        transform.position = Vector3.MoveTowards(transform.position, instantiate.waypoints[_index].transform.position, duration * Time.deltaTime);
+        if (!_tooClose)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, instantiate.waypoints[_index].transform.position, speed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, instantiate.waypoints[_index].transform.position) < 0.5f)
+            {
+                RestrictWalk();
+            }
+        }
 
     }
+
+
 
 
 }

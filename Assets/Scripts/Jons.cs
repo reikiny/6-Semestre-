@@ -12,13 +12,16 @@ public class Jons : MonoBehaviour
         vida = 3;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (vida < 3)
-            vidas[vida].SetActive(false);
 
-        if (vida == 0)
+        for (int i = 0; i < vidas.Length; i++)
+        {
+            if (i > vida - 1)
+                vidas[i].SetActive(false);
+        }
+
+        if (vida <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
