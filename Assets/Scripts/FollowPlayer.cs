@@ -76,8 +76,8 @@ public class FollowPlayer : Enemy
         if (!_tooClose)
         {
             transform.position = Vector3.MoveTowards(transform.position, _targetPositions[0], speed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, _targetPositions[0]) < 0.5f)
-                RestrictWalk();
+           // if (Vector3.Distance(transform.position, _targetPositions[0]) < 0.5f)
+               // RestrictWalk();
 
         }
         if (_tooClose || Vector3.Distance(transform.position, _targetPositions[0]) <= 0)
