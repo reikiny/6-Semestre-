@@ -4,6 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 [RequireComponent(typeof(Tile))]
+[ExecuteInEditMode]
 public class RotateGround : MonoBehaviour
 {
     [FoldoutGroup("Specifications", expanded: false)]
